@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public OkHttpClient client;
     //public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     public static final MediaType CONTENT_TYPE = MediaType.get("application/x-www-form-urlencoded");
-    //String apUrl = "www.example.com/oauth/token";       // replace host url through your oauth2 server.
+    String apUrl = "www.example.com/oauth/token";       // replace host url through your oauth2 server.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
