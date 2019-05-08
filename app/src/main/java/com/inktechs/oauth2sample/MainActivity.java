@@ -1,4 +1,4 @@
-package com.inktechs.retrofitoauth2;
+package com.inktechs.oauth2sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -27,15 +27,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        try {
-            loginRequest(apUrl);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void loginRequest(String apUrl) throws IOException {
-
         client = new OkHttpClient.Builder()
                 .addInterceptor(new BasicAuthInterceptor("USER_CLIENT_APP", "password"))
                 .build();
@@ -44,6 +35,15 @@ public class MainActivity extends AppCompatActivity {
         String password = "password";
         String grant_type = "password";
         String requestData = "grant_type=" + grant_type + "&username=" + username + "&password=" + password;
+
+        try {
+            loginRequest(apUrl, requestData);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loginRequest(String apUrl, String requestData) throws IOException {
 
         RequestBody body = RequestBody.create(CONTENT_TYPE, requestData);
         Request request = new Request.Builder()

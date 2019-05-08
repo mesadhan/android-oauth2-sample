@@ -1,4 +1,4 @@
-package com.inktechs.retrofitoauth2;
+package com.inktechs.oauth2sample;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
