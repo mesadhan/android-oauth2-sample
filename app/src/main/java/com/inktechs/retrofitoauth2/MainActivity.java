@@ -15,15 +15,26 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
+
     public OkHttpClient client;
     //public static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     public static final MediaType CONTENT_TYPE = MediaType.get("application/x-www-form-urlencoded");
+    //String apUrl = "www.example.com/oauth/token";       // replace host url through your oauth2 server.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        try {
+            loginRequest(apUrl);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loginRequest(String apUrl) throws IOException {
 
         client = new OkHttpClient.Builder()
                 .addInterceptor(new BasicAuthInterceptor("USER_CLIENT_APP", "password"))
@@ -32,21 +43,11 @@ public class MainActivity extends AppCompatActivity {
         String username = "user";
         String password = "password";
         String grant_type = "password";
-
-        String url = "http://auth-ngfs-core-framework.apps.115.127.24.184.nip.io/oauth/token";
         String requestData = "grant_type=" + grant_type + "&username=" + username + "&password=" + password;
-        try {
-            post(url, requestData);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void post(String url, String requestData) throws IOException {
 
         RequestBody body = RequestBody.create(CONTENT_TYPE, requestData);
         Request request = new Request.Builder()
-                .url(url)
+                .url(apUrl)
                 .addHeader("Content-Type", " application/x-www-form-urlencoded")
                 .post(body)
                 .build();
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void getRequest(String url) throws IOException {
+    /*public void getRequest(String url) throws IOException {
         client = new OkHttpClient.Builder().build();
 
         Request request = new Request.Builder()
@@ -91,5 +92,5 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-    }
+    }*/
 }
